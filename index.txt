@@ -1,0 +1,37 @@
+initMixin
+  initLifecycle
+    $option
+    $parent 并且 $parent.$children.push(this)
+    $root
+    $children
+    $refs
+    _watcher
+    _inactive
+    _directInactive
+    _isMounted
+    _isDestoryed
+    _isBeingDestroyed
+  initEvents
+    _events
+    _hasHookEvent
+  initRender
+    createElement
+      参数 修正
+      data 属性 为 原生 类型
+      根据 is 属性 修改 tag
+      检验 key 是否 为 原生
+      支持 第一个 function 型 的 children 为 scoped slot
+      normalize children
+      判断 是 保留字
+        是 VNode
+        否 判断 是否 有 Ctor
+      判断 有 data
+        如果 有 class 或 style 则 注册为 响应式
+    defineReactive('$attrs')
+    defineReactive('$listeners')
+  callHook(vm, 'beforeCreate')
+  initInjections
+  initState
+  initProvide
+  callHook(vm, 'created')
+

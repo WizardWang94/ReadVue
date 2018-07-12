@@ -1,0 +1,15 @@
+options.abstract 是什么属性
+
+_hasHookEvent 属性值
+
+_parentListeners 是什么
+
+resolveSlots 做个例子试一下
+
+$scopedSlots 为什么做成了一个freeze的空对象
+
+typeof tag !== 'string' 是 什么 情况
+
+normalization 是 什么 意思
+
+dep.depend() 的 目的 是 什么

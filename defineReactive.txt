@@ -1,0 +1,8 @@
+defineReactive
+  检查 是否 自带 getter 和 setter
+    是 则 使用 自带 的 getter 和 setter
+    defineProperty
+      get
+        dep.depend
+      set
+        dep.nofity
