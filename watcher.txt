@@ -1,0 +1,25 @@
+Watcher
+  constructor
+    vm._watchers.push(this)
+    设置getter 用来触发diff
+  get
+    计算 value
+    如果 options.deep 为 true
+      则 遍历 value
+    cleanupDeps()
+  addDep
+    增加 不重复 的 依赖
+  cleanupDeps
+    重新 计算 依赖
+  update
+    订阅者 接口 当 依赖 改变 的 时候 调用
+  run
+    调度表 接口 调度表 调用
+  evaluate
+    lazy watcher 用来 计算 value
+    dirty 置为 false
+  depend
+    调用 所有 依赖 的 depend 接口
+  teardown
+    移除 所有 对 依赖 的 依赖
+    active 置为 false

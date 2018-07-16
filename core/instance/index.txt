@@ -1,0 +1,15 @@
+instance/index
+  contructor
+    执行 _init
+  initMixin
+    挂载 _init
+  stateMixin
+    挂载 $data 返回 _data
+    挂载 $props 返回 _props
+    挂载 $set
+    挂载 $delete
+    挂载 $watch
+      new Watcher() 详情见 watcher.txt
+  eventsMixin
+  lifecycleMixin
+  renderMixin
