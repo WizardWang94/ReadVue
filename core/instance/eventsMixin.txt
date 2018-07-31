@@ -1,0 +1,11 @@
+eventMixin
+  挂载 $on
+    按 event 分类 push 到 队列中
+  挂载 $once
+    根据 callback 生成 一个 带 $off 的 callback
+  挂载 $off
+    如果 没有 指定 event
+      是 vm._events 置为 空对象
+    按 event 分类 splice 指定 callback
+  挂载 $emit
+    按 event 分类 apply callback

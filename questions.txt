@@ -1,15 +1,15 @@
-options.abstract ÊÇÊ²Ã´ÊôĞÔ
+options.abstract æ˜¯ä»€ä¹ˆå±æ€§
 
-_hasHookEvent ÊôĞÔÖµ
+_hasHookEvent å±æ€§å€¼
 
-_parentListeners ÊÇÊ²Ã´
+_parentListeners æ˜¯ä»€ä¹ˆ
 
-resolveSlots ×ö¸öÀı×ÓÊÔÒ»ÏÂ
+resolveSlots åšä¸ªä¾‹å­è¯•ä¸€ä¸‹
 
-$scopedSlots ÎªÊ²Ã´×ö³ÉÁËÒ»¸öfreezeµÄ¿Õ¶ÔÏó
+$scopedSlots ä¸ºä»€ä¹ˆåšæˆäº†ä¸€ä¸ªfreezeçš„ç©ºå¯¹è±¡
 
-typeof tag !== 'string' ÊÇ Ê²Ã´ Çé¿ö
+typeof tag !== 'string' æ˜¯ ä»€ä¹ˆ æƒ…å†µ
 
-normalization ÊÇ Ê²Ã´ ÒâË¼
+normalization æ˜¯ ä»€ä¹ˆ æ„æ€
 
-dep.depend() µÄ Ä¿µÄ ÊÇ Ê²Ã´
+dep.depend() çš„ ç›®çš„ æ˜¯ ä»€ä¹ˆ

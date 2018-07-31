@@ -36,6 +36,13 @@ initMixin
       defineReactive('$listeners') 详情查看 defineReact.txt
     callHook(vm, 'beforeCreate')
     initInjections
+      resolveInject
+        迭代 查询 parent._provided 将 结果 挂载 给 vm
     initState
+      初始化 _watchers
+      initProps
+        迭代 props
+          validateProp
+          defineReactive
     initProvide
     callHook(vm, 'created')
