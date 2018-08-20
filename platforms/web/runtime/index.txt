@@ -1,0 +1,5 @@
+extend directives
+extend components
+挂载 _patch
+挂载 $mount
+  return mountComponent 详见 core/instance/lifecycle

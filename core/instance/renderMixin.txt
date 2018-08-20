@@ -1,6 +1,0 @@
-renderMixin
-  挂载 $nextTick
-  挂载 _render
-    挂载 $scopedSlots
-    render.call(vm._renderProxy, vm.$createElement)
-    设置 parent

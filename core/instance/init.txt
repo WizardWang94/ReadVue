@@ -14,7 +14,7 @@ initMixin
       _inactive
       _directInactive
       _isMounted
-      _isDestoryed
+      _isDestroyed
       _isBeingDestroyed
     initEvents
       _events
@@ -44,5 +44,17 @@ initMixin
         迭代 props
           validateProp
           defineReactive
+          设置 _props proxy
+      initMethods
+        遍历 methods
+          监测 是否 和 prop 重复
+          监测 是否 是 保留字
+      initData
+        迭代 data
+          设置 _data proxy
     initProvide
+      挂载 _provided
+        provide.call(vm)
     callHook(vm, 'created')
+      判断 是否 有 $el
+        是 mount

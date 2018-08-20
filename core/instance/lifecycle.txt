@@ -1,0 +1,45 @@
+lifecycleMixin
+  挂载 _update
+    如果 vm._isMounted
+      是 callHook beforeUpdate
+    调用 vm.__patch__
+  挂载 $forceUpdate
+    vm._watcher.update()
+  挂载 $destroy
+    callHook beforeDestroy
+    vm._isBeingDestroyed 置为 true 防止 多次 destroy
+    移除 $parent 对 自己 的 引用
+    teardown _watchers
+    vm._isDestroyed 置为 true
+    vm.__patch__ null
+    callHook destroyed
+    vm.$off
+    注销 对 父节点 的 引用
+
+mountComponent
+  挂载 $el
+  callHook beforeMount
+  vm._update
+    第一个 参数 是 vnode
+      vnode 来自 vm._render() 详见 core/instance/render
+  判断 vm.$vnode 是否 null
+    原因 组件 第一次 渲染 之前 vm.$vnode 为 null
+    是
+      vm._isMounted 置为 true
+      callHook mounted
+  返回 vm
+
+updateChildComponent
+  更新 vm.$options._parentVnode
+  更新 vm.$vnode
+  更新 vm._vnode.parent
+  更新 vm.$options._renderChildren
+  更新 vm.$attrs
+  更新 vm.$listeners
+  更新 vm.$options.$props
+  更新 vm.$options._parentListeners
+  updateComponentListeners
+  判断 是否 hasChildren
+    是
+      更新 vm.$slot
+      vm.$forceUpdate

@@ -10,6 +10,6 @@ instance/index
     挂载 $delete
     挂载 $watch
       new Watcher() 详情见 watcher.txt
-  eventsMixin 详情见 eventsMixin.txt
-  lifecycleMixin 详情见 lifecycleMixin.txt
-  renderMixin 详情见 renderMixin.txt
+  eventsMixin 详情见 core/instance/events.txt
+  lifecycleMixin 详情见 core/instance/lifecycle.txt
+  renderMixin 详情见 core/instance/render.txt

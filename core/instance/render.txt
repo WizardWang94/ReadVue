@@ -1,0 +1,11 @@
+renderMixin
+  installRenderHelpers
+  挂载 $nextTick
+  挂载 _render
+    _parentVnode render 来自 $options
+    挂载 $scopedSlots
+      来自 _parentVnode.data.scopedSlots
+    render.call(vm._renderProxy, vm.$createElement)
+    设置 parent
+      来自 _parentVnode
+    返回 vnode
