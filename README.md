@@ -12,3 +12,6 @@
 ## 2018/08/20
 阅读core模块
 涉及platforms/web/runtime模块
+
+## 2018/08/24
+阅读core模块

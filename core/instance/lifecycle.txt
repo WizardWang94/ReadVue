@@ -11,7 +11,7 @@ lifecycleMixin
     移除 $parent 对 自己 的 引用
     teardown _watchers
     vm._isDestroyed 置为 true
-    vm.__patch__ null
+    vm.__patch__ 置为 null
     callHook destroyed
     vm.$off
     注销 对 父节点 的 引用

@@ -1,0 +1,120 @@
+createPatchFunction
+  返回 function patch
+    vnode 为 新 vnode
+    oldVnode 为 旧 vnode
+    判断 vnode 是否 存在
+      否
+        判断 oldVnode 是否 存在
+          是 invokeDestroyHook
+    isInitialPathc 置为 false
+    insertedVnodeQueue 初始化 []
+    判断 oldVnode 是否 存在
+      否
+        isInitialPathc 置为 true
+        createElm 详见 局部 函数 定义
+      是
+        isRealElement 置为 isDef(oldVnode.nodeType)
+        判断 isRealElement && sameVnode(oldVnode, vnode) sameVnode 详见 局部 函数 定义
+          是
+            patchVnode 详见 局部 函数 定义
+          否
+            判断 oldVnode 是否 是 DOMElement
+              是  猜想 这里 是 针对 SSR 节点 的 特殊 处理
+                hydrating 置为 true
+                判断 hydrating 是否 为 true
+                  是
+                    hydrate()
+                    判断 hydrate 是否 为 true
+                      是
+                        invokeInsertHook
+                        返回 oldVnode
+            createElm
+            判断 vnode.parent 是否 存在
+              patchable 置为 isPatchable(vnode)
+              是
+                递归
+                  沿 vnode.parent 上升
+                    迭代 调用 destroy
+                  判断 patchable
+                    是
+                      迭代 调用 create
+                      迭代 调用 directives inserted hook
+                    否
+                      registerRef 注册 ref
+            判断 parentEle 是否 存在
+              是 移除 oldVnode
+              否
+                判断 oldVnode.tag 是否 存在
+                  是 invokeDestroyHook
+    invokeInsertHook
+    返回 vnode.elm DOMElement
+  局部 函数 定义
+  createElm
+    判断 vnode.elm && isDef(owner)
+      是
+        createComponent 详见 局部 函数 定义
+        判断 createComponent 是否 为 true
+          是 返回 结束 函数
+        判断 tag 是否 存在
+          是
+            nodeOps.createElement
+            setScope 详见 局部 函数 定义
+  createComponent
+    判断 vnode.data 是否 存在
+      是
+        isReactivated 置为 isDef(vnode.componentInstance) && i.keepAlive
+        判断 vnode.hook.init 是否 存在
+          是 vnode.hook.init()
+        判断 vnode.componentInstance 是否 存在
+          是 initComponent
+          判断 isReactivated
+            是 reactivateComponent
+          返回 true
+  setScope 待补充
+  sameVnode
+    比较 key
+      比较 (tag && isComment && isDef(data) sameInputType)
+        || (isTrue(a.isAsyncPlaceholder) &&
+        a.asyncFactory === b.asyncFactory &&
+        isUndef(b.asyncFactory.error)) 待补充
+  patchVnode
+    判断 oldVnode === vnode 是否 为 true
+      是 返回 结束 函数
+    elm = vnode.elm = oldVnode.elm
+    判断 oldVnode.isAsyncPlaceholder
+      是
+        判断 vnode.asyncFactory.resolved 是否 存在
+          是
+            hydrate
+          否
+            vnode.isAsyncPlaceholder
+        返回
+    判断 vnode.isStatic && old.isStatic && key && (isTrue(vnode.isCloned) || isTrue(vnode.isOnce))
+      是
+        vnode.componentInstance = oldVnode.componentInstance
+        返回
+    判断 data.hook.prepatch 是否 存在
+      是 data.hook.prepatch
+    判断 isDef(data) && isPatchable
+      迭代 cbs.update[]()
+      判断 data.hook.update 是否 存在
+        是 data.hook.update
+    判断 vnode.text 是否 存在
+      否
+        判断 vnode.children && oldVnode.children
+          两者 都 存在
+            判断 vnode.childen !== oldVnode.childen
+              是 updateChildren
+          只 vnode.children 存在
+            判断 oldVnode.text 是否 存在
+              是 setTextContent ''
+            addVnodes
+          只 oldVnode.children 存在
+            removeVnodes
+          oldVnode.text
+            setTextContent ''
+      是
+        判断 oldVnode.text !== vnode.text 为 true
+          setTextContent vnode.text
+    判断 vnode.data.hook.postpatch 是否 存在
+      是 vnode.data.hook.postpatch
