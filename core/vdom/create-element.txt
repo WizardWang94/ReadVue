@@ -1,0 +1,41 @@
+createElement
+  判断 data 参数 是否 是 Array.isArray(data) || isPrimitive(data)
+    是 重载 认为 没有 data
+  判断 isTrue(alwaysNormalize) 是否 为 true
+    是 normalizationType 置为 ALWAYS_NORMALIZE
+  返回 _createElement
+_createElement
+  判断 data.is 是否 存在
+    是 tag 置为 data.is
+  判断 tag 是否 存在
+    否 createEmptyVNode
+  判断 Array.isArray(children) && typeof children[0] === 'function'
+    是
+      data.scopedSlots 初始化 为 { default: children[0] };
+      children.length 置为 0
+  判断 normalizationType === ALWAYS_NORMALIZE
+    children 置为 normalizeChildren
+  判断 normalizationType === SIMPLE_NORMALIZE
+    children 置为 simpleNormalizeChildren
+  判断 typeof tag 是否 为 'string'
+    是
+      判断 tag 是否 是 保留 标签
+        是 vnode 置为 new VNode
+      Ctor 初始化 为 resolveAsset(context.$options, 'components', tag)
+      否则 判断 Ctor 是否 存在
+        是 vnode 置为 createComponent
+      否则
+        vnode 置为 new VNode
+    否
+      vnode 置为 createComponent
+    判断 vnode 是否 是 数组
+      是 返回 vnode
+    否则 判断 vnode 是否 存在
+      是
+        applyNS
+        registerDeepBindings 详见 局部 函数 定义
+        返回 vnode
+    否则 返回 createEmptyVNode
+registerDeepBindings 绑定 style 和 class
+  traverse(style)
+  traverse(class)

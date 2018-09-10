@@ -71,12 +71,15 @@ createPatchFunction
             是 reactivateComponent
           返回 true
   setScope 待补充
+  isPatchable
+    沿 vnode.componentInstance._vnode 下降 至 vnode.componentInstance 不 存在
+    返回 isDef(vnode.tag)
   sameVnode
     比较 key
       比较 (tag && isComment && isDef(data) sameInputType)
         || (isTrue(a.isAsyncPlaceholder) &&
         a.asyncFactory === b.asyncFactory &&
-        isUndef(b.asyncFactory.error)) 待补充
+        isUndef(b.asyncFactory.error)) 待补充 应该 和 SSR 有 关系
   patchVnode
     判断 oldVnode === vnode 是否 为 true
       是 返回 结束 函数
@@ -118,3 +121,37 @@ createPatchFunction
           setTextContent vnode.text
     判断 vnode.data.hook.postpatch 是否 存在
       是 vnode.data.hook.postpatch
+  updateChildren 核心 算法
+    核心 思想
+      遍历 newVnodeList 把 oldVnodeList 中 可 复用 的 节点 重新 排序
+        不 可 使用 的 removeVnodes
+        新 的 addVnodes
+  addVnodes
+    迭代 createElm
+  removeVnodes
+    判断 isDef(ch) 是否 为 true
+      是
+        判断 isDef(ch.tag)
+          是
+            removeAndInvokeRemoveHook 详见 局部 函数 定义
+            invokeDestroyHook 详见 局部 函数 定义
+  invokeDestroyHook
+    判断 vnode.data.hook.destroy
+      是 vnode.data.hook.destroy
+    遍历 vnode.children
+      invokeDestroyHook(vnode.children)
+  removeAndInvokeRemoveHook
+    判断 isDef(rm) || isDef(vnode.data)
+      是
+        listeners 初始化 为 cbs.remove.length + 1
+        判断 isDef(rm)
+          是 rm.listeners += listeners
+          否 rm 置为 createRmCb
+        判断 vnode.componentInstance._vnode.data 是否 存在
+          removeAndInvokeRemoveHook
+        cbs.remove[i]()
+        判断 vnode.data.hook.remove 是否 存在
+          是 vnode.data.hook.remove
+          否 rm()
+      否
+        removeNode(vnode.elm)
